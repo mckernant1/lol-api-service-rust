@@ -4,9 +4,10 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-tonic = "0.12.2"
-tonic-types = "0.12.2"
-tonic-health = "0.12.2"
+tonic = "0.12.3"
+tonic-types = "0.12.3"
+tonic-health = "0.12.3"
+tonic-reflection = "0.12.3"
 
 aws-config = "1.5.6"
 aws-sdk-dynamodb = "1.47.0"
@@ -16,6 +17,8 @@ prost = "0.13.3"
 prost-types = "0.13.3"
 tokio = { version = "1.0", features = ["full"] }
 mckernant1-tools = "0.0.8"
+cached = { version = "0.54.0", features = ["async"] }
+chrono = "0.4.39"
 
 serde = { version = "1.0", features = ["derive"] }
 serde_json = { version = "1.0" }
@@ -23,6 +26,8 @@ serde_dynamo = { version = "4", features = ["aws-sdk-dynamodb+1"] }
 
 thiserror = "2.0.9"
 eyre = "0.6.12"
+log = "0.4.22"
+env_logger = "0.11.6"
 
 [build-dependencies]
 tonic-build = "0.12"

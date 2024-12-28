@@ -8,16 +8,15 @@ use crate::util::ddb::DdbScanCompletion;
 
 const TEAMS_TABLE_NAME: &str = "Teams";
 
-pub struct TeamService {
+pub struct TeamAccess {
     ddb: Client,
 }
 
-impl TeamService {
+impl TeamAccess {
     pub fn new(ddb: Client) -> Self {
         Self { ddb }
     }
 
-    /// Retrieves a team by its ID.
     pub async fn get_team(&self, team_id: String) -> GwenResult<Team> {
         let response = self
             .ddb
@@ -33,8 +32,7 @@ impl TeamService {
             None => Err(GwenError::ItemNotFound { key: team_id }),
         }
     }
-
-    /// Scans all teams in the DynamoDB table.
+    
     pub async fn scan_teams(&self) -> GwenResult<Vec<Team>> {
         let teams = self
             .ddb

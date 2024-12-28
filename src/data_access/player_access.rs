@@ -5,12 +5,12 @@ use aws_sdk_dynamodb::Client;
 use crate::util::ddb::DdbQueryCompletion;
 
 const PLAYERS_TABLE_NAME: &str = "Players";
-const PLAYERS_ID_INDEX: &str = "id-index";
-pub struct PlayerService {
+// const PLAYERS_ID_INDEX: &str = "id-index";
+pub struct PlayerAccess {
     ddb: Client,
 }
 
-impl PlayerService {
+impl PlayerAccess {
     pub fn new(ddb: Client) -> Self {
         Self { ddb }
     }

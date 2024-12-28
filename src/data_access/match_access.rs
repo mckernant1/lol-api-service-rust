@@ -7,11 +7,21 @@ use mckernant1_tools::iter::distinct::DistinctExt;
 
 const MATCHES_TABLE_NAME: &str = "Matches";
 
-pub struct LeagueAccess {
+pub struct MatchAccess {
     ddb: Client,
 }
 
-impl LeagueAccess {
+impl MatchAccess {
+    pub(crate) fn new(ddb: Client) -> Self {
+        Self {
+            ddb
+        }
+    }
+}
+
+impl MatchAccess {
+
+
     pub async fn get_matches_for_tournament(
         &self,
         tournament_id: String,
@@ -19,7 +29,7 @@ impl LeagueAccess {
         let matches = self
             .ddb
             .query()
-            .table_name("MATCHES_TABLE_NAME")
+            .table_name(MATCHES_TABLE_NAME)
             .key_condition_expression("tournamentId = :desiredTourney")
             .expression_attribute_values(":desiredTourney", AttributeValue::S(tournament_id))
             .into_paginator()

@@ -8,11 +8,11 @@ use crate::result::GwenError;
 const TOURNAMENTS_TABLE_NAME: &str = "Tournaments";
 const TOURNAMENT_INDEX: &str = "tournamentId-index";
 
-pub struct TournamentService {
+pub struct TournamentAccess {
     ddb: Client,
 }
 
-impl TournamentService {
+impl TournamentAccess {
     pub fn new(ddb: Client) -> Self {
         Self { ddb }
     }

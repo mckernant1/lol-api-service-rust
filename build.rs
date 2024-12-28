@@ -1,3 +1,5 @@
+use std::env;
+use std::path::PathBuf;
 use walkdir::WalkDir;
 
 fn main() {
@@ -9,10 +11,14 @@ fn main() {
         .filter_map(|it| it.path().to_str().map(|s| s.to_owned()))
         .collect::<Vec<String>>();
 
+    let out_dir = PathBuf::from(env::var("OUT_DIR").unwrap());
+
     tonic_build::configure()
         .compile_well_known_types(true)
         .type_attribute(".", "#[derive(Deserialize)]")
         .type_attribute(".", "#[derive(Serialize)]")
+        .type_attribute(".", "#[serde(rename_all=\"camelCase\")]")
+        .file_descriptor_set_path(out_dir.join("lol-grpc-models.bin"))
         .compile(protos.as_slice(), &["lol-grpc-models/"])
         .unwrap()
 }

@@ -12,11 +12,12 @@ pub struct LeagueAccess {
 }
 
 impl LeagueAccess {
-    fn new(ddb: Client) -> LeagueAccess {
+    pub(crate) fn new(ddb: Client) -> LeagueAccess {
         LeagueAccess { ddb }
     }
 
-    async fn scan_leagues(&self) -> GwenResult<Vec<League>> {
+
+    pub async fn scan_leagues(&self) -> GwenResult<Vec<League>> {
         let leagues = self
             .ddb
             .scan()
@@ -28,7 +29,7 @@ impl LeagueAccess {
         Ok(leagues)
     }
 
-    async fn get_league(&self, league_id: String) -> GwenResult<League> {
+    pub async fn get_league(&self, league_id: String) -> GwenResult<League> {
         let league_item = self
             .ddb
             .get_item()

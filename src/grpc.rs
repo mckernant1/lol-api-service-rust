@@ -1,4 +1,7 @@
 pub mod lol_api {
+
+    pub const FILE_DESCRIPTOR_SET: &[u8] = tonic::include_file_descriptor_set!("lol-grpc-models");
+
     pub mod google {
         pub mod protobuf {
             use serde::{Deserialize, Serialize};

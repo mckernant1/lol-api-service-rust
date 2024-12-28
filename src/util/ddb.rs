@@ -1,6 +1,7 @@
 use crate::Result;
 use aws_sdk_dynamodb::operation::query::paginator::QueryPaginator;
 use aws_sdk_dynamodb::operation::scan::paginator::ScanPaginator;
+use log::debug;
 use serde::Deserialize;
 use serde_dynamo::from_items;
 
@@ -17,7 +18,7 @@ impl DdbScanCompletion for ScanPaginator {
             .collect::<std::result::Result<Vec<_>, _>>()
             .await
             .map_err(|it| it.into_service_error())?;
-
+        debug!("Found items {result:?}");
         Ok(from_items(result)?)
     }
 }
